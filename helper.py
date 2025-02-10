@@ -1,5 +1,6 @@
 import os
 import shutil
+import time
 
 from tqdm import tqdm
 
@@ -100,3 +101,36 @@ def create_dataset_file(source_dir="assembly", dest_file:str="dataset.txt", eos:
 
         else:
             raise RuntimeWarning(f"File in source folder with wrong extension. Should be .S, but is {filename.split('.')[-1]}")
+
+def compile_inplace(source_dir="sources", dest_dir="assembly_inplace", assembler="gcc", riscv:bool=True, verbose:bool=False):
+    if riscv:
+        assembler = "riscv64-unknown-elf-" + assembler
+
+    if not os.path.exists(dest_dir):
+        os.makedirs(dest_dir)
+
+    # Walk through the source directory
+    for root, _, files in os.walk(source_dir):
+        for file in files:
+            if file.endswith('.7z'):
+                command = f"7z x {os.path.join(root, file)} -o{source_dir} -aoa"
+                if not verbose:
+                    command += " >/dev/null 2>/dev/null"
+                os.system(command)
+
+    # for file in tqdm(os.listdir(source_dir), desc="Compiling"):
+    # from pathlib import Path
+    # for file in tqdm([str(p) for p in Path("sources").rglob("*") if p.is_file()], desc="Compiling"):
+    for file in tqdm([os.path.join(root, f) for root, _, files in os.walk('sources') for f in files], desc="Compiling"):
+        for file in files:
+            if file.endswith(".c"):
+                c_file = os.path.join(source_dir, file)
+                s_filename = file[:-2] + ".S"
+                s_file = os.path.join(dest_dir, s_filename)
+
+                command = f"{assembler} -O0 -S {c_file} -o {s_file}"
+                if not verbose:
+                        command += " >/dev/null 2>/dev/null"
+                os.system(command)
+            else:
+                raise RuntimeError("Wrong file format in extracted directory.")

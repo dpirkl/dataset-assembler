@@ -17,6 +17,12 @@ For RISC-V, you need:
 python main.py
 ```
 
+If you want to first move/copy the files:
+
+```bash
+python main.py --copy
+```
+
 ## Pipeline
 
 - Clone repos with C-code.
@@ -27,4 +33,4 @@ The current default is RISC-V assembly, but it can be changed.
 
 ## Main problem
 
-Out of ~50000 .c files, only ~1200 files finish compilation. This is less than 2%. Due to copying files and not compiling in place.
+Out of ~50000 .c files, only ~2100 files finish compilation (when using compile_inplace). This is ~40%. Only ~2% when first copying the files.

@@ -1,0 +1,6 @@
+https://github.com/TheAlgorithms/C.git
+https://github.com/Privanom/algorithms.git
+https://github.com/singhofen/c-programming.git
+https://github.com/webwithaman/c-programming-questions.git
+https://github.com/Rohan-Shakya/c-programs.git
+wget https://github.com/SySeVR/SySeVR/raw/refs/heads/master/Program\%20data/SARD/SARD.7z

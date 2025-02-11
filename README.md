@@ -9,6 +9,7 @@ This is a code to assemble your own assembly dataset. I used it to finetune a la
 - Python
 
 For RISC-V, you need:
+
 - [RISC-V GNU Compiler Toolchain](https://github.com/riscv-collab/riscv-gnu-toolchain)
 
 ## Usage
@@ -17,7 +18,7 @@ For RISC-V, you need:
 python main.py
 ```
 
-If you want to first move/copy the files:
+If you want to copy the `C` files to the `extraced` directory:
 
 ```bash
 python main.py --copy
@@ -25,12 +26,12 @@ python main.py --copy
 
 ## Pipeline
 
-- Clone repos with C-code.
-- Copy and compile C files.
+- Clone repos with `C` code.
+- Copy and compile `C` files.
 - Create one large text file.
 
 The current default is RISC-V assembly, but it can be changed.
 
-## Main problem
+## Main Problem
 
-Out of ~50000 .c files, only ~2100 files finish compilation (when using compile_inplace). This is ~40%. Only ~2% when first copying the files.
+Out of ~50000 `C` files, ~21000 files finish compilation. This is ~40%.

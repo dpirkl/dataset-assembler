@@ -104,7 +104,7 @@ def create_dataset_file(source_dir:str="assembly", dest_file:str="dataset.txt", 
                 f.write(code)
 
 
-def compile_all(source_dir:str="sources", dest_dir:str="assembly", compiler:str="gcc", riscv:bool=True, verbose:bool=False):
+def compile_all(source_dir:str="sources", dest_dir:str="assembly", compiler:str="gcc", copy:bool=False, copy_dir:str="copy", riscv:bool=True, verbose:bool=False):
     """Compile all C files in `source_dir`.
 
     Args:
@@ -119,8 +119,12 @@ def compile_all(source_dir:str="sources", dest_dir:str="assembly", compiler:str=
 
     for file in tqdm([os.path.join(root, f) for root, _, files in os.walk(source_dir) for f in files], desc="Compiling"):
         if file.endswith(".c") or file.endswith(".C"):
-            file:str = file.replace(" ", "")  # noqa: PLW2901
-            s_filename:str = file[len(source_dir)+1:-2].replace("/", "_") + ".S"
+            c_file:str = file.replace(" ", "\ ")
+            s_filename:str = c_file[len(source_dir)+1:-2].replace("/", "_").replace("\ ", "") + ".S"
             s_file:str = os.path.join(dest_dir, s_filename)
 
-            os.system(f"{compiler} -O0 -S '{file}' -o '{s_file}'{" >/dev/null 2>/dev/null" if not verbose else ""}")
+            os.system(f"{compiler} -O0 -S '{c_file}' -o '{s_file}'{" >/dev/null 2>/dev/null" if not verbose else ""}")
+
+            if copy:
+                dest:str = os.path.join(copy_dir, s_filename[:-2] + ".c")
+                shutil.copy(file, dest)

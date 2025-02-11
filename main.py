@@ -19,9 +19,8 @@ if __name__ == "__main__":
     assembly_dir:str = args.assembly_dir
 
     verbose:bool = True if args.verbose else False
+    copy:bool = True if args.copy else False
 
     download(source_dir=source_dir, sources_file=sources_file, verbose=verbose)
-    if args.copy:
-        copy_c_files(source_dir=source_dir, dest_dir=copy_dir)
-    compile_all(source_dir=source_dir, verbose=verbose)
+    compile_all(source_dir=source_dir, copy=copy, copy_dir=copy_dir, verbose=verbose)
     create_dataset_file(source_dir=source_dir, verbose=verbose)

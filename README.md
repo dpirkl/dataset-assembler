@@ -7,6 +7,8 @@ This is a code to assemble your own assembly dataset. I used it to finetune a la
 - [GCC](https://gcc.gnu.org/) (or another compiler)
 - Git
 - Python
+    - Packages:
+        - tqdm
 
 For RISC-V, you need:
 

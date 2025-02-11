@@ -4,7 +4,7 @@ import shutil
 from tqdm import tqdm
 
 
-def uncompress_files(directory:str="sources", verbose:bool=True):
+def uncompress_files(directory:str="sources", verbose:bool=False):
     """Searches for compressed files/folder in `directory` and uncompresses them.
 
     Args:
@@ -15,12 +15,12 @@ def uncompress_files(directory:str="sources", verbose:bool=True):
     for root, _, files in os.walk(directory):
         for file in files:
             if file.endswith('.7z'):
-                os.system(f"7z x {os.path.join(root, file)} -o{directory} -aoa{" >/dev/null 2>/dev/null" if not verbose else ""}")
+                os.system(f"7z x {os.path.join(root, file)} -o{directory} -aoa{' >/dev/null 2>/dev/null' if not verbose else ''}")
 
             # TODO: Add other compressed file types
 
 
-def download(source_dir:str="sources", sources_file:str="sources/sources.txt", verbose=False):
+def download(source_dir:str="sources", sources_file:str="sources/sources.txt", verbose:bool=False):
     """Download files from links in `sources_file`. Assumes git repositories as default.
     For wget links, the line should start with "wget".
 
@@ -38,7 +38,7 @@ def download(source_dir:str="sources", sources_file:str="sources/sources.txt", v
         if link.startswith("wget"):
             file_name:str = link.split('/')[-1]
             if not os.path.exists(os.path.join(source_dir, file_name)):
-                os.system(f"{link} -P {source_dir}{" >/dev/null 2>/dev/null" if not verbose else ""}")
+                os.system(f"{link} -P {source_dir}{' >/dev/null 2>/dev/null' if not verbose else ''}")
             else:
                 if verbose:
                     print(f"A file with the name {file_name} already exists at {os.path.join(source_dir, file_name)}. Continuing with the next link.")
@@ -46,12 +46,12 @@ def download(source_dir:str="sources", sources_file:str="sources/sources.txt", v
         else:
             folder_name:str = os.path.join(source_dir, link.split('/')[-1][:-4])
             if not os.path.exists(folder_name):
-                os.system(f"git clone {link} {folder_name}{" >/dev/null 2>/dev/null" if not verbose else ""}")
+                os.system(f"git clone {link} {folder_name}{' >/dev/null 2>/dev/null' if not verbose else ''}")
             else:
                 if verbose:
                     print(f"A folder with the name {link.split('/')[-1][:-4]} already exists at {folder_name} already exists. Continuing with the next link.")
 
-    uncompress_files(source_dir)
+    uncompress_files(source_dir, verbose=verbose)
 
 
 def copy_c_files(source_dir:str="sources", dest_dir="copy"):
@@ -123,7 +123,7 @@ def compile_all(source_dir:str="sources", dest_dir:str="assembly", compiler:str=
             s_filename:str = c_file[len(source_dir)+1:-2].replace("/", "_").replace("\ ", "") + ".S"
             s_file:str = os.path.join(dest_dir, s_filename)
 
-            os.system(f"{compiler} -O0 -S '{c_file}' -o '{s_file}'{" >/dev/null 2>/dev/null" if not verbose else ""}")
+            os.system(f"{compiler} -O0 -S '{c_file}' -o '{s_file}'{' >/dev/null 2>/dev/null' if not verbose else ''}")
 
             if copy:
                 dest:str = os.path.join(copy_dir, s_filename[:-2] + ".c")

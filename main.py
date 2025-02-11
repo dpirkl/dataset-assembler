@@ -3,7 +3,6 @@ import argparse
 from helper import compile_all, create_dataset_file, download
 
 if __name__ == "__main__":
-    # add arguments
     parser = argparse.ArgumentParser()
     parser.add_argument("-c", "--copy", action="store_true", help="Copys C files to specified folder.")
     parser.add_argument("-v", "--verbose", action="store_true", help="Prints extra information.")

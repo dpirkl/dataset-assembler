@@ -20,7 +20,7 @@ def uncompress_files(directory:str="sources", verbose:bool=True):
             # TODO: Add other compressed file types
 
 
-def download(source_dir="sources", sources_file="sources/sources.txt", verbose=False):
+def download(source_dir:str="sources", sources_file:str="sources/sources.txt", verbose=False):
     """Download files from links in `sources_file`. Assumes git repositories as default.
     For wget links, the line should start with "wget".
 
@@ -54,7 +54,7 @@ def download(source_dir="sources", sources_file="sources/sources.txt", verbose=F
     uncompress_files(source_dir)
 
 
-def copy_c_files(source_dir="sources", dest_dir="copy"):
+def copy_c_files(source_dir:str="sources", dest_dir="copy"):
     """Copy all `C` files from `source_dir` to `dest_dir`.
 
     Args:
@@ -79,7 +79,7 @@ def replace_tab(code:str, replace_with:str=" "):
     return code.replace("\t", replace_with)
 
 
-def create_dataset_file(source_dir="assembly", dest_file:str="dataset.txt", eos:str="<|endoftext|>"):
+def create_dataset_file(source_dir:str="assembly", dest_file:str="dataset.txt", eos:str="<|endoftext|>"):
     """Creates a contiuos dataset file from all assembly files in `source_dir`.
 
     Args:

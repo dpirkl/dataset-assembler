@@ -20,7 +20,15 @@ def uncompress_files(directory:str="sources", verbose:bool=True):
             # TODO: Add other compressed file types
 
 
-def download(source_dir="sources", sources_file="sources.txt", verbose=False):
+def download(source_dir="sources", sources_file="sources/sources.txt", verbose=False):
+    """Download files from links in `sources_file`. Assumes git repositories as default.
+    For wget links, the line should start with "wget".
+
+    Args:
+        source_dir (str, optional): Directory for downloads. Defaults to "sources".
+        sources_file (str, optional): File with list of sources. Defaults to "sources.txt".
+        verbose (bool, optional): Controlls verbosity. Defaults to False.
+    """
     with open(sources_file, "r") as f:
         links = f.readlines()
 
@@ -46,7 +54,13 @@ def download(source_dir="sources", sources_file="sources.txt", verbose=False):
     uncompress_files(source_dir)
 
 
-def copy_c_files(source_dir="sources", dest_dir="copy", verbose=False):
+def copy_c_files(source_dir="sources", dest_dir="copy"):
+    """Copy all `C` files from `source_dir` to `dest_dir`.
+
+    Args:
+        source_dir (str, optional): Directory to search for `C` files Subdirectories are also searched. Defaults to "sources".
+        dest_dir (str, optional): Directory to copy `C` to. Defaults to "copy".
+    """
 
     if not os.path.exists(dest_dir):
         os.makedirs(dest_dir)
@@ -61,10 +75,18 @@ def copy_c_files(source_dir="sources", dest_dir="copy", verbose=False):
 
 
 def replace_tab(code:str, replace_with:str=" "):
+    """Replace tabs with spaces in code."""
     return code.replace("\t", replace_with)
 
 
 def create_dataset_file(source_dir="assembly", dest_file:str="dataset.txt", eos:str="<|endoftext|>"):
+    """Creates a contiuos dataset file from all assembly files in `source_dir`.
+
+    Args:
+        source_dir (str, optional): The directory to serach for assembly files. Defaults to "assembly".
+        dest_file (str, optional): The file to copy the code to. Defaults to "dataset.txt".
+        eos (str, optional): Sperator between files. Defaults to "<|endoftext|>".
+    """
 
     if os.path.exists(dest_file):
         os.remove(dest_file)

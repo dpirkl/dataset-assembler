@@ -22,6 +22,6 @@ if __name__ == "__main__":
 
     download(source_dir=source_dir, sources_file=sources_file, verbose=verbose)
     if args.copy:
-        copy_c_files(source_dir=source_dir, dest_dir=copy_dir, verbose=verbose)
+        copy_c_files(source_dir=source_dir, dest_dir=copy_dir)
     compile_all(source_dir=source_dir, verbose=verbose)
     create_dataset_file(source_dir=source_dir, verbose=verbose)

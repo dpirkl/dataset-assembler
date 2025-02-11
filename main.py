@@ -16,4 +16,4 @@ if __name__ == "__main__":
 
     download(source_dir=args.source_dir, sources_file=args.sources_file, verbose=args.verbose)
     compile_all(source_dir=args.source_dir, copy=args.copy, copy_dir=args.copy_dir, verbose=args.verbose)
-    create_dataset_file(source_dir=args.source_dir, dest_file=args.dataset_file, eos=args.eos)
+    create_dataset_file(assembly_dir=args.assembly_dir, dest_file=args.dataset_file, eos=args.eos)

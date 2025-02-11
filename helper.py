@@ -78,7 +78,7 @@ def replace_tab(code:str, replace_with:str=" "):
     return code.replace("\t", replace_with)
 
 
-def create_dataset_file(source_dir:str="assembly", dest_file:str="dataset.txt", eos:str="<|endoftext|>"):
+def create_dataset_file(assembly_dir:str="assembly", dest_file:str="dataset.txt", eos:str="<|endoftext|>"):
     """Creates a contiuos dataset file from all assembly files in `source_dir`.
 
     Args:
@@ -90,9 +90,9 @@ def create_dataset_file(source_dir:str="assembly", dest_file:str="dataset.txt", 
     if os.path.exists(dest_file):
         os.remove(dest_file)
 
-    for filename in tqdm(os.listdir(source_dir), desc="Creating dataset file"):
+    for filename in tqdm(os.listdir(assembly_dir), desc="Creating dataset file"):
         if filename.lower().endswith(".s"):
-            with open(f"{os.path.join(source_dir, filename)}", "r") as f:
+            with open(f"{os.path.join(assembly_dir, filename)}", "r") as f:
                 code:str = f.read()
 
             code = replace_tab(code)

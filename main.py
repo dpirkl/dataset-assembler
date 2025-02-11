@@ -6,11 +6,11 @@ if __name__ == "__main__":
     # add arguments
     parser = argparse.ArgumentParser()
     parser.add_argument("-c", "--copy", action="store_true", help="Copys C files to specified folder.")
-    parser.add_argument("-v", "--verbose", action="store_true")
-    parser.add_argument("--source_dir", default="sources")
-    parser.add_argument("--sources_file", default="sources/sources.txt")
-    parser.add_argument("--copy_dir", default="copy")
-    parser.add_argument("--assembly_dir", default="assembly")
+    parser.add_argument("-v", "--verbose", action="store_true", help="Prints extra information.")
+    parser.add_argument("--source_dir", default="sources", help="Directory for downloads.")
+    parser.add_argument("--sources_file", default="sources/sources.txt", help="File with list of sources (links).")
+    parser.add_argument("--copy_dir", default="copy", help="Directory to copy C files to. Only used if -c/--copy is set.")
+    parser.add_argument("--assembly_dir", default="assembly", help="Directory to store assembly files.")
     args = parser.parse_args()
 
     source_dir = args.source_dir

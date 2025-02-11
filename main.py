@@ -1,6 +1,6 @@
 import argparse
 
-from helper import compile_all, copy_c_files, create_dataset_file, download
+from helper import compile_all, create_dataset_file, download
 
 if __name__ == "__main__":
     # add arguments

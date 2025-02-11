@@ -20,7 +20,7 @@ For RISC-V, you need:
 python main.py
 ```
 
-If you want to copy the `C` files to the `extraced` directory:
+If you want to copy the `C` files to the `copy` directory:
 
 ```bash
 python main.py --copy

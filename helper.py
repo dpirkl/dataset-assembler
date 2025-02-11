@@ -12,12 +12,11 @@ def uncompress_files(directory:str="sources", verbose:bool=False):
         verbose (bool, optional): Controlls verbosity. Defaults to True.
     """
 
-    for root, _, files in os.walk(directory):
-        for file in files:
-            if file.endswith('.7z'):
-                os.system(f"7z x {os.path.join(root, file)} -o{directory} -aoa{' >/dev/null 2>/dev/null' if not verbose else ''}")
+    for file in tqdm([os.path.join(root, f) for root, _, files in os.walk(directory) for f in files], desc="Uncompressing"):
+        if file.endswith('.7z'):
+            os.system(f"7z x {file} -o{directory} -aoa{' >/dev/null 2>/dev/null' if not verbose else ''}")
 
-            # TODO: Add other compressed file types
+        # TODO: Add other compressed file types
 
 
 def download(source_dir:str="sources", sources_file:str="sources/sources.txt", verbose:bool=False):

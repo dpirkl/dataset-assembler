@@ -46,7 +46,7 @@ def download(source_dir="sources", sources_file="sources.txt", verbose=False):
     uncompress_files(source_dir)
 
 
-def copy_c_files(source_dir="sources", dest_dir="extracted", verbose=False):
+def copy_c_files(source_dir="sources", dest_dir="copy", verbose=False):
 
     if not os.path.exists(dest_dir):
         os.makedirs(dest_dir)

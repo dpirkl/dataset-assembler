@@ -176,7 +176,7 @@ cython_debug/
 .DS_Store
 
 # Assembly and C files
-extracted
+copy
 sources
 assembly
 assembly_inplace

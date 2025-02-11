@@ -13,14 +13,6 @@ if __name__ == "__main__":
     parser.add_argument("--assembly_dir", default="assembly", help="Directory to store assembly files.")
     args = parser.parse_args()
 
-    source_dir:str = args.source_dir
-    sources_file:str = args.sources_file
-    copy_dir:str = args.copy_dir
-    assembly_dir:str = args.assembly_dir
-
-    verbose:bool = True if args.verbose else False
-    copy:bool = True if args.copy else False
-
-    download(source_dir=source_dir, sources_file=sources_file, verbose=verbose)
-    compile_all(source_dir=source_dir, copy=copy, copy_dir=copy_dir, verbose=verbose)
-    create_dataset_file(source_dir=source_dir, verbose=verbose)
+    download(source_dir=args.source_dir, sources_file=args.sources_file, verbose=args.verbose)
+    compile_all(source_dir=args.source_dir, copy=args.copy, copy_dir=args.copy_dir, verbose=args.verbose)
+    create_dataset_file(source_dir=args.source_dir, verbose=args.verbose)

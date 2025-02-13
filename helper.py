@@ -106,17 +106,12 @@ def create_dataset_file(assembly_dir:str="assembly", dataset_file:str="dataset.t
         if os.path.exists(dest_tokenize_file):
             os.remove(dest_tokenize_file)
 
-    for idx, filename in tqdm(enumerate(os.listdir(assembly_dir)), desc="Creating dataset file()"):
+    for filename in tqdm(os.listdir(assembly_dir), desc="Creating dataset file()"):
         if filename.lower().endswith(".s"):
             with open(f"{os.path.join(assembly_dir, filename)}", "r") as f:
                 code:str = f.read()
 
             code = replace_tab(code, n_spaces=1)
-
-            if len(code) > 6000:
-                #TODO: Add a better way to handle long files
-                print(f"Skipping {filename} as it is too long.")
-                continue
 
             if not full_code:
                 full_code_file:str = dataset_file.split(".")[0] + "_full_code.txt"
